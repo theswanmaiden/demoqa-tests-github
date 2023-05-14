@@ -1,4 +1,4 @@
-package quru.qa;
+package com.potter;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,16 +10,13 @@ import static com.codeborne.selenide.Selenide.*;
 public class SelenideTest {
     @BeforeAll
     static void beforeAll() {
-
-        Configuration.pageLoadTimeout = 60000;
         open("https://github.com");
     }
 
     @Test
     void findSelenideOnGitHub() {
         $("[name=q]").setValue("selenide").pressEnter();
-        var firstRepositoryFound = $$("ul.repo-list li").first().$("a");
-        firstRepositoryFound.click();
+        $$("ul.repo-list li").first().$("a").click();
         $("#wiki-tab").click();
         $("#wiki-body").shouldHave(text("Soft assertions"));
         $x("//a[text()='Soft assertions']").click();
